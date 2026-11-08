@@ -1,0 +1,29 @@
+# Python virtual environment
+.venv/
+
+# Python temporary files
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Local secrets and configuration
+.env
+.env.*
+!.env.example
+model_uri.txt
+
+# Data and saved models
+data/
+model_bundle/
+*.pkl
+*.joblib
+*.skops
+
+# Local MLflow tracking files
+mlflow.db*
+mlruns/
+mlartifacts/
+
+# Log files
+*.log
