@@ -1,4 +1,4 @@
-name: Insurance Fraud Python Tests
+name: Insurance Fraud MLOps CI
 
 on:
   push:
@@ -14,16 +14,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download repository code
-        uses: actions/checkout@v4
+      - name: Download project code
+        uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.13"
 
-      - name: Install dependencies
+      - name: Install test dependencies
         run: python -m pip install -r requirements-ci.txt
 
-      - name: Run automated tests
+      - name: Run pytest
         run: python -m pytest -q tests/test_fraud_checks.py
+
+      - name: Check Docker image build
+        run: docker build -f Dockerfile.ci -t insurance-fraud-api-ci .
