@@ -1,0 +1,31 @@
+name: Insurance Fraud Python Tests
+
+# Run automatically when code is pushed
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Allow the workflow to read repository files
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download repository code
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements-ci.txt
+
+      - name: Run automated tests
+        run: python -m pytest -q tests/test_fraud_checks.py
